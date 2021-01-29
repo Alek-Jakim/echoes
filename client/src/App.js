@@ -1,5 +1,7 @@
-import React from 'react'
-import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core'
+import React, { useEffect } from 'react'
+import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { getPosts } from './redux/actions/postsActions'
 
 
 import Posts from './components/Posts';
@@ -9,7 +11,11 @@ import useStyles from './styling/styles';
 
 const App = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(getPosts());
+    }, [dispatch])
 
     return (
         <Container maxWidth="lg">
