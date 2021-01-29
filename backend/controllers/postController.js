@@ -4,8 +4,6 @@ export const getPosts = async (req, res) => {
     try {
         const postMessages = await PostMessage.find();
 
-        console.log(postMessages);
-
         res.status(200).json(postMessages);
     }
     catch (error) {
@@ -16,7 +14,10 @@ export const getPosts = async (req, res) => {
 }
 
 export const createPost = async (req, res) => {
-    const newPost = new PostMessage(post);
+
+    const { title, message, selectedFile, creator, tags } = req.body
+
+    const newPost = new PostMessage({ title, message, selectedFile, creator, tags });
 
     try {
         await newPost.save();
