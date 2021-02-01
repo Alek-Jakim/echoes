@@ -15,7 +15,7 @@ const Form = () => {
         e.preventDefault();
 
         dispatch(createPost(postData));
-        console.log(postData)
+        setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' })
     }
 
     const clear = () => {
@@ -42,8 +42,8 @@ const Form = () => {
                             onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
                         />
                     </div>
-                    <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
-                    <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
+                    <Button className={classes.buttonSubmit} variant="contained" size="large" type="submit" fullWidth>Submit</Button>
+                    <Button variant="contained" className={classes.buttonClear} size="small" onClick={clear} fullWidth>Clear</Button>
                 </form>
             </Paper>
         </>

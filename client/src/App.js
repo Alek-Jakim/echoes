@@ -8,6 +8,7 @@ import Posts from './components/Posts';
 import Form from './components/Form';
 import memories from './images/memories.png';
 import useStyles from './styling/styles';
+import './index.css'
 
 const App = () => {
     const classes = useStyles();
@@ -20,8 +21,8 @@ const App = () => {
     return (
         <Container maxWidth="lg">
             <AppBar className={classes.appBar} position="static" color="inherit">
-                <Typography className={classes.heading} variant="h2" align="center">Echoes</Typography>
                 <img className={classes.image} src={memories} alt="memories" height="60" />
+                <Typography className={classes.heading} variant="h2" align="center">Echoes</Typography>
             </AppBar>
             <Grow in>
                 <Container>
