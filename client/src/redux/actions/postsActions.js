@@ -1,5 +1,5 @@
 import * as api from '../../utils/fetchPosts';
-import { CREATE, FETCH_ALL } from '../constants/postsConstants';
+import { CREATE, FETCH_ALL, UPDATE } from '../constants/postsConstants';
 
 export const getPosts = () => async (dispatch) => {
     try {
@@ -7,7 +7,7 @@ export const getPosts = () => async (dispatch) => {
 
         dispatch({ type: FETCH_ALL, payload: data });
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
 };
 
@@ -17,6 +17,17 @@ export const createPost = (post) => async (dispatch) => {
 
         dispatch({ type: CREATE, payload: data });
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
 };
+
+export const updatePost = (id, post) => async (dispatch) => {
+    try {
+        const { data } = await api.updatePost(id, post);
+
+        dispatch({ type: UPDATE, payload: data })
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
