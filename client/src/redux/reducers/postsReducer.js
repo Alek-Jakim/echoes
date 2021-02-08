@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from "../constants/postsConstants";
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from "../constants/postsConstants";
 
 const posts = (posts = [], action) => {
     switch (action.type) {
@@ -7,6 +7,7 @@ const posts = (posts = [], action) => {
         case CREATE:
             return [...posts, action.payload];
         case UPDATE:
+        case LIKE:
             return posts.map((post) => post._id === action.payload ? action.payload : post);
         case DELETE:
             return posts.filter((post) => post._id !== action.payload);

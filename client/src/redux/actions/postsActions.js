@@ -1,5 +1,5 @@
 import * as api from '../../utils/fetchPosts';
-import { CREATE, DELETE, FETCH_ALL, UPDATE } from '../constants/postsConstants';
+import { CREATE, DELETE, FETCH_ALL, LIKE, UPDATE } from '../constants/postsConstants';
 
 export const getPosts = () => async (dispatch) => {
     try {
@@ -41,4 +41,15 @@ export const deletePost = (id) => async (dispatch) => {
     catch (error) {
         console.log(error);
     }
-}
+};
+
+export const likePost = (id) => async (dispatch) => {
+    try {
+        const { data } = await api.likePost(id);
+
+        dispatch({ type: LIKE, payload: data })
+    }
+    catch (error) {
+        console.log(error);
+    }
+};

@@ -4,9 +4,11 @@ import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@
 import moment from 'moment';
 import ThumbUp from '@material-ui/icons/ThumbUpAlt';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import StarsIcon from '@material-ui/icons/Stars';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { useDispatch } from 'react-redux';
-import { deletePost } from '../redux/actions/postsActions';
+import { deletePost, likePost } from '../redux/actions/postsActions';
+import hashtag from '../utils/hashtag'
 
 const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
@@ -25,21 +27,21 @@ const Post = ({ post, setCurrentId }) => {
                 </Button>
             </div>
             <div className={classes.details}>
-                <Typography variant="body2" color="textSecondary">{post.tags.map(tag => `#${tag} `)}</Typography>
+                <Typography variant="body2" color="textSecondary">{hashtag(post.tags)}</Typography>
             </div>
             <Typography className={classes.title} variant="h5" gutterBottom>{post.title}</Typography>
             <CardContent>
                 <Typography variant="h5" gutterBottom>{post.message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button size="small" className={classes.likeAndDelete} onClick={() => { }}>
-                    <ThumbUp fontSize="small" />
-                    Like
-                    {' ' + post.likeCount}
+                <Button size="small" className={classes.like} onClick={() => dispatch(likePost(post._id))} >
+                    <StarsIcon fontSize="large" className={classes.likeIcon} />
+
+                    {post.likeCount !== 1 ? `  ${post.likeCount} Stars` : ` ${post.likeCount} Star`}
                 </Button>
-                <Button size="small" className={classes.likeAndDelete} onClick={() => dispatch(deletePost(post._id))}>
-                    <DeleteForeverIcon fontSize="small" />
-                    Delete
+                <Button size="small" className={classes.delete} onClick={() => dispatch(deletePost(post._id))}>
+                    <DeleteForeverIcon fontSize="large" />
+                    remove
                 </Button>
             </CardActions>
         </Card>

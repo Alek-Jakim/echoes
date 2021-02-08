@@ -47,11 +47,19 @@ export default makeStyles({
         margin: '0 10px'
     },
     cardActions: {
-        padding: '0 16px 8px 16px',
+        padding: '0 15px 8px 15px',
         display: 'flex',
         justifyContent: 'space-between',
     },
-    likeAndDelete: {
-        color: '#266333'
+    like: {
+        color: '#6C3483',
+        fontWeight: 'bold'
+    },
+    delete: {
+        color: '#B03A2E',
+        fontWeight: 'bold'
+    },
+    likeIcon: {
+        marginRight: '3px'
     }
 });
