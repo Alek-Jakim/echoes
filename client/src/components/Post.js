@@ -31,17 +31,20 @@ const Post = ({ post, setCurrentId }) => {
             </div>
             <Typography className={classes.title} variant="h5" gutterBottom>{post.title}</Typography>
             <CardContent>
-                <Typography variant="h5" gutterBottom>{post.message}</Typography>
+                <Typography variant="body2" color="textPrimary" component="p" >{post.message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <Button size="small" className={classes.like} onClick={() => dispatch(likePost(post._id))} >
-                    <StarsIcon fontSize="large" className={classes.likeIcon} />
 
+                    <StarsIcon fontSize="large" className={classes.likeIcon} />
+                    &nbsp;
                     {post.likeCount !== 1 ? `  ${post.likeCount} Stars` : ` ${post.likeCount} Star`}
                 </Button>
                 <Button size="small" className={classes.delete} onClick={() => dispatch(deletePost(post._id))}>
+
                     <DeleteForeverIcon fontSize="large" />
                     remove
+                    &nbsp;
                 </Button>
             </CardActions>
         </Card>
