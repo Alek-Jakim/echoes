@@ -20,7 +20,6 @@ app.use('/posts', postRoutes);
 //DB connection
 connectToDB();
 
-
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
