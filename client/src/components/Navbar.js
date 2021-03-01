@@ -1,13 +1,32 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import useStyles from '../styling/navStyles';
 import memories from '../images/memories.png'
+import { useDispatch } from 'react-redux';
 
 const Navbar = () => {
     const classes = useStyles();
+    const history = useHistory();
+    const location = useLocation();
 
-    const user = null;
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const dispatch = useDispatch();
+
+    const logout = () => {
+        dispatch({ type: 'LOGOUT' })
+
+        history.push('/');
+
+        setUser(null);
+    }
+
+    useEffect(() => {
+        const token = user?.token;
+
+        //JWT...
+        setUser(JSON.parse(localStorage.getItem('profile')))
+    }, [location])
 
     return (
         <>
@@ -24,7 +43,7 @@ const Navbar = () => {
                             <Typography className={classes.userName} variant="h6">
                                 {user.result.name}
                             </Typography>
-                            <Button variant="contained" className={classes.logout} color="secondary" >Sign Out</Button>
+                            <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>Sign Out</Button>
                         </div>
                     ) : (
                             <Button component={Link} to="/auth" variant="contained" color="primary">

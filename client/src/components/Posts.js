@@ -10,10 +10,6 @@ const Posts = ({ setCurrentId }) => {
     const classes = useStyles();
     const posts = useSelector((state) => state.posts);
 
-    const circularProgress = {
-        color: '#fff'
-    }
-
     return (
         !posts.length ? <CircularProgress color="secondary" /> :
             <Grid className={classes.mainContainer} container alignItems="stretch" spacing={3}>
