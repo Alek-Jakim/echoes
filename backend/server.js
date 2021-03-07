@@ -5,6 +5,7 @@ import connectToDB from './config/db.js'
 
 //Routes
 import postRoutes from './routes/posts.js'
+import userRoutes from './routes/users.js'
 
 //Basic config
 const app = express();
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use('/posts', postRoutes);
+app.use('/user', userRoutes);
 
 //DB connection
 connectToDB();
