@@ -3,7 +3,11 @@ import { AUTH } from '../constants/postsConstants';
 
 export const signup = (formData, history) => async (dispatch) => {
     try {
-        //sign up as user
+
+        const { data } = await api.signUp(formData);
+
+        dispatch({ type: AUTH, data });
+
         history.push('/')
     }
     catch (error) {
@@ -13,11 +17,13 @@ export const signup = (formData, history) => async (dispatch) => {
 
 export const signin = (formData, history) => async (dispatch) => {
     try {
-        //log in as user
+        const { data } = await api.signIn(formData);
+
+        dispatch({ type: AUTH, data });
 
         history.push('/')
     }
     catch (error) {
-        console.log(error);
+        console.log(error.message);
     }
 }
