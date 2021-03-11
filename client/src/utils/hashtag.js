@@ -15,4 +15,5 @@ const hashtag = (tags) => {
     return splitTags.join(' ');
 }
 
+
 export default hashtag;

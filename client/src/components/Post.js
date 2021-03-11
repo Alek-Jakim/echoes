@@ -10,6 +10,8 @@ import { useDispatch } from 'react-redux';
 import { deletePost, likePost } from '../redux/actions/postsActions';
 import hashtag from '../utils/hashtag'
 
+
+
 const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -18,7 +20,7 @@ const Post = ({ post, setCurrentId }) => {
         <Card className={classes.card}>
             <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
             <div className={classes.overlay}>
-                <Typography variant="h6">{post.creator}</Typography>
+                <Typography variant="h6">{post.name}</Typography>
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>
@@ -27,7 +29,7 @@ const Post = ({ post, setCurrentId }) => {
                 </Button>
             </div>
             <div className={classes.details}>
-                <Typography variant="body2" color="textSecondary">{hashtag(post.tags)}</Typography>
+                <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag} `)}</Typography>
             </div>
             <Typography className={classes.title} variant="h5" gutterBottom>{post.title}</Typography>
             <CardContent>
@@ -38,7 +40,7 @@ const Post = ({ post, setCurrentId }) => {
 
                     <StarsIcon fontSize="large" className={classes.likeIcon} />
                     &nbsp;
-                    {post.likeCount !== 1 ? `  ${post.likeCount} Stars` : ` ${post.likeCount} Star`}
+                    {post.likes.length === 0 ? '0 stars' : post.likes}
                 </Button>
                 <Button size="small" className={classes.delete} onClick={() => dispatch(deletePost(post._id))}>
 
