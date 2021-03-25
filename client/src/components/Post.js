@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import useStyles from '../styling/postStyles';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
 import moment from 'moment';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
@@ -27,7 +26,7 @@ const Post = ({ post, setCurrentId }) => {
                 );
         }
 
-        return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
+        return <><StarBorderIcon fontSize="large" />&nbsp;Star</>;
     };
 
     return (
