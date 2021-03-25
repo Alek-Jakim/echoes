@@ -12,8 +12,6 @@ const Form = ({ currentId, setCurrentId }) => {
     const [postData, setPostData] = useState({ title: '', message: '', tags: '', selectedFile: '' });
     const user = JSON.parse(localStorage.getItem('profile'));
 
-    console.log(currentId)
-
     useEffect(() => {
         if (post) {
             setPostData(post);

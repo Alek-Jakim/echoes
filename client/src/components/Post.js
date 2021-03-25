@@ -2,19 +2,33 @@ import React, { useEffect } from 'react'
 import useStyles from '../styling/postStyles';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
 import moment from 'moment';
-import ThumbUp from '@material-ui/icons/ThumbUpAlt';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import StarsIcon from '@material-ui/icons/Stars';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { useDispatch } from 'react-redux';
 import { deletePost, likePost } from '../redux/actions/postsActions';
-import hashtag from '../utils/hashtag'
-
 
 
 const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
+    const user = JSON.parse(localStorage.getItem('profile'));
+
+    const Stars = () => {
+        if (post.likes.length > 0) {
+            return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+                ? (
+                    <><StarIcon fontSize="large" />&nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} star${post.likes.length > 1 ? 's' : ''}`}</>
+                ) : (
+                    <><StarBorderIcon fontSize="large" />&nbsp;{post.likes.length} {post.likes.length === 1 ? 'Star' : 'Stars'}</>
+                );
+        }
+
+        return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
+    };
 
     return (
         <Card className={classes.card}>
@@ -23,11 +37,13 @@ const Post = ({ post, setCurrentId }) => {
                 <Typography variant="h6">{post.name}</Typography>
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
-            <div className={classes.overlay2}>
-                <Button style={{ color: '#5FDC77' }} size="small" onClick={() => setCurrentId(post._id)}>
-                    <MoreHorizIcon fontSize="default" />
-                </Button>
-            </div>
+            {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+                <div className={classes.overlay2}>
+                    <Button style={{ color: '#5FDC77' }} size="small" onClick={() => setCurrentId(post._id)}>
+                        <MoreHorizIcon fontSize="default" />
+                    </Button>
+                </div>
+            )}
             <div className={classes.details}>
                 <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag} `)}</Typography>
             </div>
@@ -36,18 +52,17 @@ const Post = ({ post, setCurrentId }) => {
                 <Typography variant="body2" color="textPrimary" component="p" >{post.message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button size="small" className={classes.like} onClick={() => dispatch(likePost(post._id))} >
-
-                    <StarsIcon fontSize="large" className={classes.likeIcon} />
-                    &nbsp;
-                    {post.likes.length === 0 ? '0 stars' : post.likes}
+                <Button size="small" disabled={!user?.result} className={classes.like} onClick={() => dispatch(likePost(post._id))} >
+                    <Stars />
                 </Button>
-                <Button size="small" className={classes.delete} onClick={() => dispatch(deletePost(post._id))}>
 
-                    <DeleteForeverIcon fontSize="large" />
+                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+                    <Button size="small" className={classes.delete} onClick={() => dispatch(deletePost(post._id))}>
+                        <DeleteForeverIcon fontSize="large" />
                     remove
                     &nbsp;
-                </Button>
+                    </Button>
+                )}
             </CardActions>
         </Card>
     )
