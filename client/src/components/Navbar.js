@@ -22,6 +22,11 @@ const Navbar = () => {
         setUser(null);
     }
 
+    // Redirects to home page when the logo is clicked
+    const logoRedirect = () => {
+        history.push('/');
+    }
+
     useEffect(() => {
         const token = user?.token;
 
@@ -42,7 +47,7 @@ const Navbar = () => {
             <AppBar className={classes.appBar} position="static" color="inherit">
                 <div className={classes.brandContainer}>
 
-                    <img className={classes.image} src={memories} alt="memories" height="60" />
+                    <img className={classes.image} src={memories} alt="memories" height="60" onClick={logoRedirect} />
                     <Typography className={classes.heading} variant="h2" align="center">Echoes</Typography>
                 </div>
                 <Toolbar className={classes.toolbar}>

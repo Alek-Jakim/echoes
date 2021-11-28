@@ -17,6 +17,7 @@ export default makeStyles((theme) => ({
     },
     image: {
         marginLeft: '15px',
+        cursor: 'pointer'
     },
     toolbar: {
         display: 'flex',
