@@ -9,7 +9,7 @@ import userRoutes from './routes/users.js'
 
 //Basic config
 const app = express();
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
 //APP.USE
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
